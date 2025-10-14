@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom body styling to match the theme */
+body {
+  color: theme('colors.sw-dark');
+  background-color: theme('colors.sw-secondary');
+  min-height: 100vh;
+}
