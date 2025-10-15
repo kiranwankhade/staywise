@@ -108,5 +108,5 @@ You can access the live application here:
 
 | Component | URL | Hosting Platform |
 | :--- | :--- | :--- |
-| **Frontend App** | [https://staywise-app.vercel.app/](YOUR_FRONTEND_DEPLOYMENT_URL) | Vercel |
-| **Backend API** | [https://staywise-api.render.com/](YOUR_BACKEND_DEPLOYMENT_URL) | Render/Other |
+| **Frontend App** | [https://staywise-frontend.vercel.app/](https://staywise-frontend.vercel.app/) | Vercel |
+| **Backend API** | [https://staywise-one.vercel.app/](https://staywise-one.vercel.app/) | Render/Other |
