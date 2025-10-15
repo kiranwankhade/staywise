@@ -84,19 +84,21 @@ export default function SortOptions({ initialProperties }: SortOptionsProps) {
 
     const handleSearchSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        setIsMenuOpen(false);
             // use memo to calculate 
     };
 
     return (
         <div className="py-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 px-4 sm:px-0">
+            <div className="flex flex-col justify-start md:flex-row md:justify-between items-start gap-4 mb-8  sm:px-0">
                 
                 <form onSubmit={handleSearchSubmit} className="w-full md:w-3/5 relative flex">
                     <input
                         type="text"
                         placeholder="Search by property title or location..."
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e) => {setSearchTerm(e.target.value);
+                            setIsMenuOpen(false)}}
                         className="flex-grow pl-4 pr-12 py-2 border border-gray-300 rounded-l-xl shadow-sm focus:ring-sw-primary focus:border-sw-primary transition"
                     />
                     <button 
@@ -108,8 +110,8 @@ export default function SortOptions({ initialProperties }: SortOptionsProps) {
                     </button>
                 </form>
 
-                <div className="relative inline-block text-left w-full md:w-auto">
-                    <div>
+                <div className="relative inline-block text-left w-1/2 md:w-56 md:w-auto">
+                    <div >
                         <button
                             type="button"
                             className="inline-flex justify-center items-center w-full rounded-xl border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-sw-primary focus:ring-offset-2"
@@ -130,7 +132,7 @@ export default function SortOptions({ initialProperties }: SortOptionsProps) {
 
                     {isMenuOpen && (
                         <div
-                            className="absolute right-0 md:left-auto mt-2 w-56 origin-top-right rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10 p-2"
+                            className="absolute right-0 md:left-auto mt-2 w-45 origin-top-right rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10 p-2"
                             role="menu"
                             aria-orientation="vertical"
                             aria-labelledby="menu-button"
