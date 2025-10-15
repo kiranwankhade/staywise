@@ -1,12 +1,27 @@
 import { IProperty } from '../../../types/property';
 import BookingForm from '../../../components/BookingForm';
-import { API_URL } from '../../../utils/constants';
 import { Users, Bed, Bath, MapPin, DollarSign, Check } from 'lucide-react';
+import { Metadata } from 'next';
 
+interface PropertyPageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+// ✅ Generate metadata
+export async function generateMetadata({ params }: Awaited<PropertyPageProps>): Promise<Metadata> {
+  const { id } = await params;
+  return {
+    title: `Property ${id}`,
+  };
+}
+
+// ✅ Fetch property
 async function getProperty(id: string): Promise<IProperty | null> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/properties/${id}`, { 
-        cache: 'no-store' 
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/properties/${id}`, {
+      cache: 'no-store',
     });
     if (!res.ok) return null;
     return res.json();
@@ -16,11 +31,11 @@ async function getProperty(id: string): Promise<IProperty | null> {
   }
 }
 
-export default async function PropertyDetailsPage({ params }: { params: { id: string } }) {
-  const property = await getProperty(params.id);
+// ✅ Page Component
+export default async function PropertyDetailsPage({ params }: Awaited<PropertyPageProps>) {
+  const { id } = await params;
+  const property = await getProperty(id);
 
-
-  
   if (!property) {
     return (
       <div className="text-center py-20 text-xl text-red-600 bg-white rounded-xl shadow-xl">
@@ -31,8 +46,6 @@ export default async function PropertyDetailsPage({ params }: { params: { id: st
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-      
-      {/* Property Details Column */}
       <div className="lg:col-span-2 space-y-10">
         <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
           <img
@@ -92,7 +105,6 @@ export default async function PropertyDetailsPage({ params }: { params: { id: st
         </div>
       </div>
 
-      {/* Booking Widget Column */}
       <div className="lg:col-span-1">
         <BookingForm propertyId={property._id} />
       </div>

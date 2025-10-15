@@ -1,5 +1,5 @@
 import { IProperty } from '../../types/property';
-import PropertyCard from '../../components/PropertyCard';
+import SortOptions from '../../components/SortOptions'; 
 
 async function getProperties(): Promise<IProperty[]> {
   try {
@@ -24,17 +24,7 @@ export default async function PropertyListPage() {
         Our Available Properties
       </h1>
       
-      {properties.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {properties.map((property) => (
-            <PropertyCard key={property._id} property={property} />
-          ))}
-        </div>
-      ) : (
-        <div className="bg-white p-10 rounded-xl shadow-xl text-center text-gray-500">
-          <p className="text-xl">No properties are available at the moment.</p>
-        </div>
-      )}
+        <SortOptions initialProperties={properties} />
     </div>
   );
 }
